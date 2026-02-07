@@ -3,6 +3,7 @@ export default function Input({
   error,
   id,
   className = '',
+  required = false,
   ...props
 }) {
   const inputId = id || props.name;
@@ -11,6 +12,7 @@ export default function Input({
       {label && (
         <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-1">
           {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
       <input

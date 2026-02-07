@@ -22,28 +22,30 @@ const createUserRules = [
     .withMessage('First name cannot exceed 50 characters'),
   body('lastName')
     .trim()
-    .notEmpty()
-    .withMessage('Last name is required')
+    .optional()
     .isLength({ max: 50 })
     .withMessage('Last name cannot exceed 50 characters'),
   body('email')
     .trim()
-    .notEmpty()
-    .withMessage('Email is required')
+    .optional({ checkFalsy: true })
     .isEmail()
     .withMessage('Please provide a valid email address')
     .normalizeEmail(),
   body('mobile')
-    .optional()
+    .optional({ checkFalsy: true })
     .trim()
-    .isLength({ max: 20 })
-    .withMessage('Mobile number cannot exceed 20 characters'),
+    .matches(/^[0-9]{10,15}$/)
+    .withMessage('Mobile number must be 10-15 digits'),
   body('gender')
-    .optional()
-    .isIn(['Male', 'Female', ''])
-    .withMessage('Gender must be Male, Female, or empty'),
+    .trim()
+    .notEmpty()
+    .withMessage('Gender is required')
+    .isIn(['Male', 'Female'])
+    .withMessage('Gender must be Male or Female'),
   body('status')
-    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage('Status is required')
     .isIn(['Active', 'InActive'])
     .withMessage('Status must be Active or InActive'),
   body('location')
@@ -51,6 +53,10 @@ const createUserRules = [
     .trim()
     .isLength({ max: 100 })
     .withMessage('Location cannot exceed 100 characters'),
+  body('verified')
+    .optional()
+    .isBoolean()
+    .withMessage('Verified must be a boolean'),
 ];
 
 const updateUserRules = [
@@ -65,21 +71,19 @@ const updateUserRules = [
   body('lastName')
     .optional()
     .trim()
-    .notEmpty()
-    .withMessage('Last name cannot be empty')
     .isLength({ max: 50 })
     .withMessage('Last name cannot exceed 50 characters'),
   body('email')
-    .optional()
+    .optional({ checkFalsy: true })
     .trim()
     .isEmail()
     .withMessage('Please provide a valid email address')
     .normalizeEmail(),
   body('mobile')
-    .optional()
+    .optional({ checkFalsy: true })
     .trim()
-    .isLength({ max: 20 })
-    .withMessage('Mobile number cannot exceed 20 characters'),
+    .matches(/^[0-9]{10,15}$/)
+    .withMessage('Mobile number must be 10-15 digits'),
   body('gender')
     .optional()
     .isIn(['Male', 'Female', ''])
@@ -93,6 +97,10 @@ const updateUserRules = [
     .trim()
     .isLength({ max: 100 })
     .withMessage('Location cannot exceed 100 characters'),
+  body('verified')
+    .optional()
+    .isBoolean()
+    .withMessage('Verified must be a boolean'),
 ];
 
 const userIdParamRules = [

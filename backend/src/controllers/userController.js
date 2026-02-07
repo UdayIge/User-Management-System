@@ -48,7 +48,7 @@ const getUserById = async (req, res, next) => {
 const getUsers = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 10;
+    const limit = parseInt(req.query.limit, 10) || 8;
     const search = req.query.search || '';
     const result = await userService.getUsers(page, limit, search);
     return paginatedResponse(

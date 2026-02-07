@@ -19,11 +19,12 @@ const initialForm = {
   gender: '',
   status: 'Active',
   location: '',
+  verified: false,
 };
 
 const statusOptions = [
-  { value: 'Active', label: 'Active' },
-  { value: 'InActive', label: 'InActive' },
+  { value: 'Active', label: 'Active', color: 'green' },
+  { value: 'InActive', label: 'InActive', color: 'red' },
 ];
 
 export default function UserFormPage() {
@@ -50,6 +51,7 @@ export default function UserFormPage() {
             gender: u.gender || '',
             status: u.status || 'Active',
             location: u.location || '',
+            verified: u.verified || false,
           });
           if (u.profile) setProfilePreview(getAssetUrl(u.profile));
         })
@@ -140,6 +142,7 @@ export default function UserFormPage() {
               value={form.firstName}
               onChange={handleChange}
               error={errors.firstName}
+              required
             />
             <Input
               label="Last Name"
@@ -159,16 +162,37 @@ export default function UserFormPage() {
               error={errors.email}
               className="md:col-span-2"
             />
-            <Input
-              label="Mobile"
-              name="mobile"
-              placeholder="Enter Mobile"
-              value={form.mobile}
-              onChange={handleChange}
-              error={errors.mobile}
-            />
+            <div className="relative">
+              <Input
+                label="Mobile"
+                name="mobile"
+                placeholder="Enter Mobile (10-15 digits)"
+                value={form.mobile}
+                onChange={handleChange}
+                error={errors.mobile}
+              />
+              {form.mobile && form.verified && (
+                <div className="absolute right-3 top-9 flex items-center gap-1">
+                  <svg
+                    className="w-5 h-5 text-blue-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="text-xs text-blue-500 font-medium">Verified</span>
+                </div>
+              )}
+            </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Select Your Gender</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Select Your Gender <span className="text-red-500">*</span>
+              </label>
               <div className="flex gap-4 mt-2">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -202,6 +226,7 @@ export default function UserFormPage() {
               value={form.status}
               onChange={handleChange}
               error={errors.status}
+              required
             />
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Select Your Profile</label>

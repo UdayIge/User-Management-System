@@ -4,6 +4,7 @@ export default function Select({
   id,
   options = [],
   className = '',
+  required = false,
   ...props
 }) {
   const selectId = id || props.name;
@@ -12,6 +13,7 @@ export default function Select({
       {label && (
         <label htmlFor={selectId} className="block text-sm font-medium text-gray-700 mb-1">
           {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
       <select

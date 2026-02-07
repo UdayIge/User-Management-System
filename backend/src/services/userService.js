@@ -50,7 +50,7 @@ const getUserById = async (userId) => {
   return user;
 };
 
-const getUsers = async (page = 1, limit = 10, search = '') => {
+const getUsers = async (page = 1, limit = 8, search = '') => {
   const skip = (page - 1) * limit;
   const query = {};
 

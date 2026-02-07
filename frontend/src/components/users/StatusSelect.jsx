@@ -8,6 +8,11 @@ export default function StatusSelect({ value, onChange }) {
   const buttonRef = useRef(null);
   const dropdownRef = useRef(null);
 
+  const statusColors = {
+    Active: 'bg-green-100 text-green-700 border-green-300 hover:bg-green-200',
+    InActive: 'bg-red-100 text-red-700 border-red-300 hover:bg-red-200',
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -64,7 +69,9 @@ export default function StatusSelect({ value, onChange }) {
         ref={buttonRef}
         type="button"
         onClick={handleToggle}
-        className="flex items-center gap-1 px-2 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+        className={`flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md font-medium transition-colors ${
+          statusColors[value] || statusColors.Active
+        }`}
       >
         {value || 'Active'}
         <FiChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />

@@ -16,8 +16,6 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, 'Email is required'],
-      unique: true,
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
@@ -27,14 +25,19 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxlength: [20, 'Mobile number cannot exceed 20 characters'],
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
     gender: {
       type: String,
       enum: ['Male', 'Female', ''],
-      default: '',
+      required: [true, 'Gender is required'],
     },
     status: {
       type: String,
       enum: ['Active', 'InActive'],
+      required: [true, 'Status is required'],
       default: 'Active',
     },
     profile: {

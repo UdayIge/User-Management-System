@@ -11,7 +11,7 @@ export default function Button({
     primary: 'bg-rose-700 text-white hover:bg-rose-800 focus:ring-rose-500',
     secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500',
     danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
+    ghost: 'bg-transparent font-semibold border text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
   };
   return (
     <button
