@@ -1,29 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, 'First name is required'],
+      required: [true, "First name is required"],
       trim: true,
-      maxlength: [50, 'First name cannot exceed 50 characters'],
+      maxlength: [50, "First name cannot exceed 50 characters"],
     },
     lastName: {
       type: String,
-      required: [true, 'Last name is required'],
+      required: [true, "Last name is required"],
       trim: true,
-      maxlength: [50, 'Last name cannot exceed 50 characters'],
+      maxlength: [50, "Last name cannot exceed 50 characters"],
     },
     email: {
       type: String,
       lowercase: true,
       trim: true,
-      match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
+      match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
     },
     mobile: {
       type: String,
       trim: true,
-      maxlength: [20, 'Mobile number cannot exceed 20 characters'],
+      maxlength: [20, "Mobile number cannot exceed 20 characters"],
     },
     verified: {
       type: Boolean,
@@ -31,36 +31,41 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['Male', 'Female', ''],
-      required: [true, 'Gender is required'],
+      enum: ["Male", "Female", ""],
+      required: [true, "Gender is required"],
     },
     status: {
       type: String,
-      enum: ['Active', 'InActive'],
-      required: [true, 'Status is required'],
-      default: 'Active',
+      enum: ["Active", "InActive"],
+      required: [true, "Status is required"],
+      default: "Active",
     },
     profile: {
       type: String,
-      default: '',
+      default: "",
     },
     location: {
       type: String,
       trim: true,
-      maxlength: [200, 'Location cannot exceed 200 characters'],
+      maxlength: [200, "Location cannot exceed 200 characters"],
     },
   },
   {
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
-userSchema.virtual('fullName').get(function () {
+userSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`.trim();
 });
 
-userSchema.index({ firstName: 'text', lastName: 'text', email: 'text', location: 'text' });
+userSchema.index({
+  firstName: "text",
+  lastName: "text",
+  email: "text",
+  location: "text",
+});
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

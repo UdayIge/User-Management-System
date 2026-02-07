@@ -1,6 +1,6 @@
-require('dotenv').config();
-const app = require('../src/app');
-const connectDatabase = require('../src/config/database');
+require("dotenv").config();
+const app = require("../src/app");
+const connectDatabase = require("../src/config/database");
 
 let isConnected = false;
 
@@ -11,9 +11,9 @@ const connectToDatabase = async () => {
   try {
     await connectDatabase();
     isConnected = true;
-    console.log('Connected to database');
+    console.log("Connected to database");
   } catch (error) {
-    console.error('Database connection error:', error);
+    console.error("Database connection error:", error);
     throw error;
   }
 };
@@ -23,11 +23,11 @@ module.exports = async (req, res) => {
     await connectToDatabase();
     return app(req, res);
   } catch (error) {
-    console.error('Error in serverless function:', error);
+    console.error("Error in serverless function:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      message: "Internal server error",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 };

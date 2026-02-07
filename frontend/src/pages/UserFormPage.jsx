@@ -1,30 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { FiUser } from 'react-icons/fi';
-import { createUser, updateUser, fetchUserById } from '../api/userApi';
-import { validateUserForm } from '../utils/validation';
-import { getAssetUrl } from '../config/api';
-import { userToFormData } from '../utils/formData';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
-import Select from '../components/ui/Select';
-import Spinner from '../components/ui/Spinner';
-import toast from 'react-hot-toast';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { FiUser } from "react-icons/fi";
+import { createUser, updateUser, fetchUserById } from "../api/userApi";
+import { validateUserForm } from "../utils/validation";
+import { getAssetUrl } from "../config/api";
+import { userToFormData } from "../utils/formData";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import Select from "../components/ui/Select";
+import Spinner from "../components/ui/Spinner";
+import toast from "react-hot-toast";
 
 const initialForm = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  mobile: '',
-  gender: '',
-  status: 'Active',
-  location: '',
+  firstName: "",
+  lastName: "",
+  email: "",
+  mobile: "",
+  gender: "",
+  status: "Active",
+  location: "",
   verified: false,
 };
 
 const statusOptions = [
-  { value: 'Active', label: 'Active', color: 'green' },
-  { value: 'InActive', label: 'InActive', color: 'red' },
+  { value: "Active", label: "Active", color: "green" },
+  { value: "InActive", label: "InActive", color: "red" },
 ];
 
 export default function UserFormPage() {
@@ -44,20 +44,20 @@ export default function UserFormPage() {
         .then((res) => {
           const u = res.data;
           setForm({
-            firstName: u.firstName || '',
-            lastName: u.lastName || '',
-            email: u.email || '',
-            mobile: u.mobile || '',
-            gender: u.gender || '',
-            status: u.status || 'Active',
-            location: u.location || '',
+            firstName: u.firstName || "",
+            lastName: u.lastName || "",
+            email: u.email || "",
+            mobile: u.mobile || "",
+            gender: u.gender || "",
+            status: u.status || "Active",
+            location: u.location || "",
             verified: u.verified || false,
           });
           if (u.profile) setProfilePreview(getAssetUrl(u.profile));
         })
         .catch((err) => {
-          toast.error(err.message || 'Failed to load user');
-          navigate('/');
+          toast.error(err.message || "Failed to load user");
+          navigate("/");
         })
         .finally(() => setLoading(false));
     }
@@ -66,7 +66,7 @@ export default function UserFormPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleFileChange = (e) => {
@@ -92,18 +92,21 @@ export default function UserFormPage() {
       const formData = userToFormData(form, profileFile);
       if (isEdit) {
         await updateUser(id, formData);
-        toast.success('User updated successfully');
+        toast.success("User updated successfully");
       } else {
         await createUser(formData);
-        toast.success('User created successfully');
+        toast.success("User created successfully");
       }
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      const msg = err.response?.data?.message || err.message || 'Operation failed';
+      const msg =
+        err.response?.data?.message || err.message || "Operation failed";
       const errs = err.response?.data?.errors;
       if (errs?.length) {
         const mapped = {};
-        errs.forEach((e) => { mapped[e.field] = e.message; });
+        errs.forEach((e) => {
+          mapped[e.field] = e.message;
+        });
         setErrors(mapped);
       } else {
         toast.error(msg);
@@ -185,7 +188,9 @@ export default function UserFormPage() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="text-xs text-blue-500 font-medium">Verified</span>
+                  <span className="text-xs text-blue-500 font-medium">
+                    Verified
+                  </span>
                 </div>
               )}
             </div>
@@ -199,7 +204,7 @@ export default function UserFormPage() {
                     type="radio"
                     name="gender"
                     value="Male"
-                    checked={form.gender === 'Male'}
+                    checked={form.gender === "Male"}
                     onChange={handleChange}
                     className="text-rose-600 focus:ring-rose-500"
                   />
@@ -210,14 +215,16 @@ export default function UserFormPage() {
                     type="radio"
                     name="gender"
                     value="Female"
-                    checked={form.gender === 'Female'}
+                    checked={form.gender === "Female"}
                     onChange={handleChange}
                     className="text-rose-600 focus:ring-rose-500"
                   />
                   <span className="text-sm">Female</span>
                 </label>
               </div>
-              {errors.gender && <p className="mt-1 text-sm text-red-500">{errors.gender}</p>}
+              {errors.gender && (
+                <p className="mt-1 text-sm text-red-500">{errors.gender}</p>
+              )}
             </div>
             <Select
               label="Select Your Status"
@@ -229,7 +236,9 @@ export default function UserFormPage() {
               required
             />
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Select Your Profile</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Select Your Profile
+              </label>
               <div className="flex items-center gap-2">
                 <input
                   type="file"
@@ -266,7 +275,7 @@ export default function UserFormPage() {
               disabled={submitting}
               className="w-full py-3"
             >
-              {submitting ? <Spinner size="sm" /> : 'Submit'}
+              {submitting ? <Spinner size="sm" /> : "Submit"}
             </Button>
           </div>
         </form>

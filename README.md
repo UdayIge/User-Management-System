@@ -20,6 +20,7 @@ A full-stack user management application built with the MERN (MongoDB, Express, 
 ## Tech Stack
 
 ### Frontend
+
 - React 18
 - React Router v6
 - Tailwind CSS
@@ -28,6 +29,7 @@ A full-stack user management application built with the MERN (MongoDB, Express, 
 - Vite (build tool)
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB with Mongoose
@@ -78,18 +80,21 @@ Proj/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd Proj
    ```
 
 2. **Backend Setup**
+
    ```bash
    cd backend
    npm install
    ```
 
    Create a `.env` file in the backend directory:
+
    ```env
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/user-management
@@ -97,12 +102,14 @@ Proj/
    ```
 
 3. **Frontend Setup**
+
    ```bash
    cd ../frontend
    npm install
    ```
 
    Create a `.env` file in the frontend directory:
+
    ```env
    VITE_API_URL=http://localhost:5000
    ```
@@ -110,15 +117,18 @@ Proj/
 ### Running the Application
 
 1. **Start MongoDB** (if using local MongoDB)
+
    ```bash
    mongod
    ```
 
 2. **Start Backend Server**
+
    ```bash
    cd backend
    npm run dev
    ```
+
    Server runs on http://localhost:5000
 
 3. **Start Frontend Development Server**
@@ -135,11 +145,13 @@ Proj/
 The backend is configured for serverless deployment on Vercel:
 
 1. Install Vercel CLI:
+
    ```bash
    npm install -g vercel
    ```
 
 2. Deploy backend:
+
    ```bash
    cd backend
    vercel
@@ -152,6 +164,7 @@ The backend is configured for serverless deployment on Vercel:
 ### Frontend - Vercel/Netlify
 
 1. Build the frontend:
+
    ```bash
    cd frontend
    npm run build
@@ -164,6 +177,7 @@ The backend is configured for serverless deployment on Vercel:
 ## API Endpoints
 
 ### Users
+
 - `GET /api/users` - Get all users (with pagination & search)
 - `GET /api/users/:id` - Get user by ID
 - `POST /api/users` - Create new user
@@ -174,6 +188,7 @@ The backend is configured for serverless deployment on Vercel:
 ## Validation Rules
 
 ### User Model
+
 - **firstName**: Required, max 50 characters
 - **lastName**: Optional, max 50 characters
 - **email**: Optional (if mobile provided), must be valid email format
@@ -187,18 +202,22 @@ The backend is configured for serverless deployment on Vercel:
 ## Features Explained
 
 ### Required Fields
+
 - First Name, Gender, and Status are mandatory
 - At least Email OR Mobile must be provided
 
 ### Mobile Verification
+
 - When a user's mobile is verified, a blue checkmark appears next to the mobile number
 - Verification status is stored in the database
 
 ### Status Colors
+
 - **Active**: Green background with green text
 - **InActive**: Red background with red text
 
 ### Profile Images
+
 - Supported formats: JPEG, JPG, PNG, GIF, WEBP
 - Images are stored in the backend's `/uploads` folder
 - Images are displayed throughout the application

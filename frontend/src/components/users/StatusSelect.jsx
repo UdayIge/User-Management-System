@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { FiChevronDown } from 'react-icons/fi';
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function StatusSelect({ value, onChange }) {
   const [open, setOpen] = useState(false);
@@ -9,8 +9,8 @@ export default function StatusSelect({ value, onChange }) {
   const dropdownRef = useRef(null);
 
   const statusColors = {
-    Active: 'bg-green-100 text-green-700 border-green-300 hover:bg-green-200',
-    InActive: 'bg-red-100 text-red-700 border-red-300 hover:bg-red-200',
+    Active: "bg-green-100 text-green-700 border-green-300 hover:bg-green-200",
+    InActive: "bg-red-100 text-red-700 border-red-300 hover:bg-red-200",
   };
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export default function StatusSelect({ value, onChange }) {
         setOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const handleToggle = () => {
@@ -37,7 +37,7 @@ export default function StatusSelect({ value, onChange }) {
     setOpen((prev) => !prev);
   };
 
-  const options = ['Active', 'InActive'];
+  const options = ["Active", "InActive"];
 
   const dropdown = open && (
     <div
@@ -54,7 +54,7 @@ export default function StatusSelect({ value, onChange }) {
             setOpen(false);
           }}
           className={`w-full px-3 py-1.5 text-left text-sm hover:bg-gray-100 ${
-            value === opt ? 'bg-gray-50 font-medium' : ''
+            value === opt ? "bg-gray-50 font-medium" : ""
           }`}
         >
           {opt}
@@ -73,8 +73,10 @@ export default function StatusSelect({ value, onChange }) {
           statusColors[value] || statusColors.Active
         }`}
       >
-        {value || 'Active'}
-        <FiChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
+        {value || "Active"}
+        <FiChevronDown
+          className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
+        />
       </button>
       {createPortal(dropdown, document.body)}
     </div>
