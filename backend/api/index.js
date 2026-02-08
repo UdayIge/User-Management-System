@@ -18,6 +18,16 @@ const connectToDatabase = async () => {
   }
 };
 
-connectToDatabase();
-
-module.exports = app;
+module.exports = async (req, res) => {
+  try {
+    await connectToDatabase();
+    return app(req, res);
+  } catch (error) {
+    console.error("Error in serverless function:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
