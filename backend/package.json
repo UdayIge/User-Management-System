@@ -2,10 +2,10 @@
   "name": "user-management-backend",
   "version": "1.0.0",
   "description": "Production-grade User Management Portal API - MERN Stack",
-  "main": "src/server.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["mern", "user-management", "express", "mongodb"],
