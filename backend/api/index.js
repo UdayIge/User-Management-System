@@ -21,7 +21,7 @@ const connectToDatabase = async () => {
 module.exports = async (req, res) => {
   try {
     await connectToDatabase();
-    return app(req, res);
+    return app;
   } catch (error) {
     console.error("Error in serverless function:", error);
     res.status(500).json({
