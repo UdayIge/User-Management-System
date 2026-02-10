@@ -2,6 +2,8 @@
 
 A full-stack user management application built with the MERN (MongoDB, Express, React, Node.js) stack. This application allows you to create, read, update, and delete user records with profile images and comprehensive user information.
 
+[Live Demo](https://users-hub-five.vercel.app/)
+
 ## Features
 
 - **User CRUD Operations**: Create, read, update, and delete users
@@ -82,7 +84,7 @@ Proj/
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/UdayIge/User-Management-System.git
    cd Proj
    ```
 
